@@ -1,0 +1,86 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:cc="http://xmlns.jcp.org/jsf/composite"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:p="http://xmlns.jcp.org/jsf/passthrough"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets">
+
+    <!-- INTERFACE -->
+    <cc:interface>
+        <cc:attribute name="player" required="true" type="model.Players" />
+        <cc:attribute name="readonly" type="java.lang.Boolean" required="false" default="true" />
+        <cc:attribute name="action" required="false" method-signature="java.lang.String action()" />
+    </cc:interface>
+    <cc:implementation>
+        <h:form>
+            <h:panelGroup layout="block" class="form-group">
+                <h:outputLabel for="playerID" value="Player ID #{cc.attrs.player.id}" />
+                <h:inputHidden class="form-control" id="playerID" value="#{cc.attrs.player.id}" />
+                <h:message for="playerID" style="color: red" />
+            </h:panelGroup>
+            <h:panelGroup layout="block" class="form-group">
+                <h:outputLabel for="playerFirstName" value="Player First Name"/>
+                <h:inputText p:placeholder="Enter Player's First Name" 
+                             class="form-control" 
+                             id="playerFirstName" 
+                             value="#{cc.attrs.player.firstName}" required="true"
+                             requiredMessage="Enter First Name"
+                             readonly="#{cc.attrs.readonly ? 'true' : 'false'}"
+                             />
+                <h:message for="playerFirstName" style="color:red" />
+            </h:panelGroup>
+
+            <h:panelGroup layout="block" class="form-group">
+                <h:outputLabel for="playerLastName" value="Player Last Name"/>
+                <h:inputText p:placeholder="Enter Player's Last Name" 
+                             class="form-control" 
+                             id="playerLastName" 
+                             value="#{cc.attrs.player.lastName}" required="true"
+                             requiredMessage="Enter Last Name" 
+                             readonly="#{cc.attrs.readonly ? 'true' : 'false'}"
+                             />
+                <h:message for="playerLastName" style="color:red" />
+            </h:panelGroup>
+              <h:panelGroup layout="block" class="form-group">
+                <h:outputLabel for="playerAge" value="Player Age"/>
+                <h:inputText p:placeholder="Enter Player's Age" 
+                             class="form-control" 
+                             id="playerAge" 
+                             value="#{cc.attrs.player.age}" required="true"
+                             requiredMessage="Enter Age" 
+                             readonly="#{cc.attrs.readonly ? 'true' : 'false'}"
+                             />
+                <h:message for="playerAge" style="color:red" />
+            </h:panelGroup>
+             
+            <h:panelGroup layout="block" class="form-group">
+                <h:outputLabel for="playeryearsOnContract" value="Player Years On Contract"/>
+                <h:inputText p:placeholder="Enter Player's Years on Contract" 
+                             class="form-control" 
+                             id="playeryearsOnContract" 
+                             value="#{cc.attrs.player.yearsonContract}" required="true"
+                             requiredMessage="Enter Years on Contract" 
+                             readonly="#{cc.attrs.readonly ? 'true' : 'false'}"
+                             />
+                <h:message for="playerYearsOnContract" style="color:red" />
+            </h:panelGroup>
+           
+            <h:panelGroup layout="block" class="form-group">
+                <h:outputLabel for="playerUserName" value="Player UserName"/>
+                <h:inputText p:placeholder="Enter Player's Username" 
+                             class="form-control" 
+                             id="playerUserName" 
+                             value="#{cc.attrs.player.user.userName}" required="true"
+                             requiredMessage="Enter User Name" 
+                             readonly="#{cc.attrs.readonly ? 'true' : 'false'}"
+                             />
+                <h:message for="playerUserName" style="color:red" />
+            </h:panelGroup>
+            <ui:fragment rendered="#{not cc.attrs.readonly}">
+                <h:commandButton class="btn btn-default" value="Save Me" action="#{cc.attrs.action}" />
+            </ui:fragment>
+        </h:form>
+    </cc:implementation>    
+
+</html>

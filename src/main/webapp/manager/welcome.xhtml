@@ -1,0 +1,98 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+                xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+                template="./../WEB-INF/templates/authTemplate.xhtml"
+                xmlns:h="http://xmlns.jcp.org/jsf/html"
+                xmlns:f="http://xmlns.jcp.org/jsf/core">
+
+    <ui:define name="title">
+        Welcome Manager #{loginController.remoteUser}
+    </ui:define>
+
+    <ui:define name="content">
+        <h:dataTable value="#{managerController.manager}" 
+                     var="manager"
+                     styleClass="table table-hover table-striped">
+            <h:column>
+                <f:facet name="header"><h:outputText value="ID"/></f:facet>
+                <h:outputText value="#{manager.id}"/>
+            </h:column>
+            <h:column>
+                <f:facet name="header"><h:outputText value="First Name"/></f:facet>
+                <h:outputText value="#{manager.firstName}"/>
+            </h:column>
+            <h:column>
+                <f:facet name="header"><h:outputText value="Last Name"/></f:facet>
+                <h:outputText value="#{manager.lastName}"/>
+            </h:column>
+            <h:column>
+                <f:facet name="header"><h:outputText value="Country"/></f:facet>
+                <h:outputText value="#{manager.country}"/>
+            </h:column>
+            <h:column>
+                <f:facet name="header"><h:outputText value="Years on Contract"/></f:facet>
+                <h:outputText value="#{manager.yearsonContract}"/>
+            </h:column>
+            <h:column>
+                <f:facet name="header"><h:outputText value="Username"/></f:facet>
+                <h:outputText value="#{manager.user.userName}"/>
+            </h:column>
+           
+        </h:dataTable>
+<h2>Players playing under you:</h2>
+
+      <h:form>
+            <h:commandLink value="Create new player" 
+                           action="#{managerController.doCreatePlayer()}"/>
+        </h:form>
+
+
+        <h:dataTable 
+            styleClass="table table-hover table-striped"
+            value="#{managerController.manager.players}" 
+            var="py">
+            <h:column>
+                <f:facet name="header">
+                    <h:outputText value="ID"/>
+                </f:facet>
+                <h:outputText value="#{py.id}"/>
+            </h:column>
+            <h:column>
+                <f:facet name="header">
+                    <h:outputText value="First Name"/>
+                </f:facet>
+                <h:outputText value="#{py.firstName}"/>
+            </h:column>
+            <h:column>
+                <f:facet name="header">
+                    <h:outputText value="Last Name"/>
+                </f:facet>
+                <h:outputText value="#{py.lastName}"/>
+            </h:column>
+             <h:column>
+                <f:facet name="header">
+                    <h:outputText value="Age"/>
+                </f:facet>
+                 <h:outputText value="#{py.age}"/>
+            </h:column>
+             <h:column>
+                <f:facet name="header">
+                    <h:outputText value="Years on Contract"/>
+                </f:facet>
+                 <h:outputText value="#{py.yearsonContract}"/>
+            </h:column>
+            <h:column>
+                <h:form>
+                    <h:commandLink value="View " action="#{managerController.doViewPlayer(py)}"/>
+                    <h:commandLink value="Update " action="#{managerController.doUpdatePlayer(py)}"/>
+                    <h:commandLink value="Delete" action="#{managerController.doDeletePlayer(py)}"/>
+                </h:form>
+            </h:column>
+        </h:dataTable>
+
+        <h:form>
+            <h:commandLink action="#{loginController.doLogout()}" value="Logout"/>
+        </h:form>
+    </ui:define>
+
+</ui:composition>

@@ -1,0 +1,50 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+                xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+                template="./../WEB-INF/templates/authTemplate.xhtml"
+                xmlns:h="http://xmlns.jcp.org/jsf/html"
+                xmlns:f="http://xmlns.jcp.org/jsf/core">
+
+    <ui:define name="title">
+        Welcome Player #{loginController.remoteUser}
+    </ui:define>
+
+    <ui:define name="content">
+        
+        <h:dataTable value="#{playersService.findByUsername(loginController.remoteUser)}" 
+                     var="players"
+                     styleClass="table table-hover table-striped">
+            <h:column>
+                <f:facet name="header"><h:outputText value="ID"/></f:facet>
+                <h:outputText value="#{players.id}"/>
+            </h:column>
+            <h:column>
+                <f:facet name="header"><h:outputText value="First Name"/></f:facet>
+                <h:outputText value="#{players.firstName}"/>
+            </h:column>
+            <h:column>
+                <f:facet name="header"><h:outputText value="Last Name"/></f:facet>
+                <h:outputText value="#{players.lastName}"/>
+            </h:column>
+            <h:column>
+                <f:facet name="header"><h:outputText value="Age"/></f:facet>
+                <h:outputText value="#{players.age}"/>
+            </h:column>
+            <h:column>
+                <f:facet name="header"><h:outputText value="Years on Contract"/></f:facet>
+                <h:outputText value="#{players.yearsonContract}"/>
+            </h:column>
+            <h:column>
+                <f:facet name="header"><h:outputText value="Username"/></f:facet>
+                <h:outputText value="#{players.user.userName}"/>
+            </h:column>
+            
+        </h:dataTable>
+        
+        
+        <h:form>
+            <h:commandLink action="#{loginController.doLogout()}" value="Logout"/>
+        </h:form>
+    </ui:define>
+
+</ui:composition>
